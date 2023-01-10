@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class title : MonoBehaviour
 {
-    public int x;
-    public int y;
-    public int z;
+    public hex_pos hex;
 
 
     public int array_x = 0;
