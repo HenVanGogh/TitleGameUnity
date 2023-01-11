@@ -5,6 +5,7 @@ using UnityEngine;
 public class title : MonoBehaviour
 {
     public hex_pos hex;
+    public Node node;
 
 
     public int array_x = 0;
@@ -13,7 +14,7 @@ public class title : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        node = GetComponent<Node>();
     }
 
 }

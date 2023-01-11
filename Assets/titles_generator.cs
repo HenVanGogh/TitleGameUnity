@@ -26,19 +26,29 @@ public class titles_generator : MonoBehaviour
         Directions.Add(new hex_pos(0, -1, 0));
         Directions.Add(new hex_pos(0, 0, 1));
         Directions.Add(new hex_pos(0, 0, -1));
-        generate_hex_playfield();
+        generate_hex_playfield(10 , 10 , 10);
         title_node = GetComponent<Node>();
     }
 
-    void generate_hex_playfield()
+    void generate_hex_playfield(int hex_size_x , int hex_size_y , int hex_size_z)
     {
-        for (int i = -10; i <= 10; i++)
+        for (int i = -hex_size_x; i <= hex_size_x; i++)
         {
-            for (int k = -10; k <= 10; k++)
+            for (int k = -hex_size_y; k <= hex_size_y; k++)
             {
-                if ((-10 < i && i < 10) && (-10 < k && k < 10) && (-10 < i + k && i + k < 10))
+                if ((-hex_size_x < i && i < hex_size_x) && (-hex_size_y < k && k < hex_size_y) && (-hex_size_z < i + k && i + k < hex_size_z))
                 {
-                    titles.Add(init_hex(get_hex_location(i, k)));
+                    titles t = init_hex(get_hex_location(i, k));
+                    foreach (hex_pos d in Directions)
+                    {
+                        hex_pos target_title_location = t.hex + d;
+                        title target_title = get_title(target_title_location);
+                        if (target_title != null)
+                        {
+                            target_title.node.m_Connections.Add(target_title.node);
+                        }
+                    }
+                    titles.Add(t);
                 }
 
 
@@ -51,7 +61,10 @@ public class titles_generator : MonoBehaviour
         foreach (title t in titles) { 
             foreach(hex_pos d in Directions)
             {
-                hex_pos target_title = t.hex + d;
+                hex_pos target_title_location = t.hex + d;
+                title target_title = get_title(target_title_location);
+                target_title.node.m_Connections.Add(target_title.node);
+
             }
             
         }
@@ -65,6 +78,18 @@ public class titles_generator : MonoBehaviour
             return cordinat_titles[x + x_mod, y + y_mod];
         }
         catch(IndexOutOfRangeException e)
+        {
+            return null;
+        }
+    }
+
+    title get_title(hex_pos h)
+    {
+        try
+        {
+            return cordinat_titles[h.x + x_mod, h.y + y_mod];
+        }
+        catch (IndexOutOfRangeException e)
         {
             return null;
         }
