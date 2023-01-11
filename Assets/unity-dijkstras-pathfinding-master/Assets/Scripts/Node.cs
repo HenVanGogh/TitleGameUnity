@@ -13,7 +13,7 @@ public class Node : MonoBehaviour
     /// The connections (neighbors).
     /// </summary>
     [SerializeField]
-    protected List<Node> m_Connections = new List<Node>();
+    public List<Node> m_Connections = new List<Node>();
 
     /// <summary>
     /// Gets the connections (neighbors).
