@@ -61,9 +61,10 @@ public class Path
 				// Don't calcualte calculated nodes
 				if ( m_Nodes.Contains ( connection ) && !calculated.Contains ( connection ) )
 				{
-					
+
 					// Calculating the distance between a node and connection when they are both available in path nodes list
-					m_Length += Vector3.Distance ( node.transform.position, connection.transform.position );
+					// m_Length += Vector3.Distance ( node.transform.position, connection.transform.position );
+					m_Length += connection.weight;
 				}
 			}
 			calculated.Add ( node );
