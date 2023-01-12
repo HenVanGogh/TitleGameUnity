@@ -39,6 +39,7 @@ public class titles_generator : MonoBehaviour
                 if ((-hex_size_x < i && i < hex_size_x) && (-hex_size_y < k && k < hex_size_y) && (-hex_size_z < i + k && i + k < hex_size_z))
                 {
                     titles t = init_hex(get_hex_location(i, k));
+                    target_title.node.weight = 1.0f;
                     foreach (hex_pos d in Directions)
                     {
                         hex_pos target_title_location = t.hex + d;

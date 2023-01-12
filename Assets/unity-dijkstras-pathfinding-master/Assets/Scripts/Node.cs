@@ -14,6 +14,7 @@ public class Node : MonoBehaviour
     /// </summary>
     [SerializeField]
     protected List<Node> m_Connections = new List<Node>();
+    public float weight;
 
     /// <summary>
     /// Gets the connections (neighbors).
